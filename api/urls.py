@@ -1,6 +1,5 @@
 from django.urls import path
-from api.views import student_function_base_view, employee_function_base_view, student_class_base_view, employee_class_base_view, mixins_employee, mixins_students
-
+from api.views import student_function_base_view, employee_function_base_view, student_class_base_view, employee_class_base_view, mixins_employee, mixins_students, generic_employee
 
 urlpatterns = [
     path('fbv-students/', student_function_base_view.studentView),
@@ -21,4 +20,7 @@ urlpatterns = [
 
     path('mixins-students/', mixins_students.Students.as_view()),
     path('mixins-student-detail/<int:pk>/', mixins_students.StudentDetail.as_view()),
+
+    path('generic-employees/', generic_employee.Employees.as_view()),
+    path('generic-employee-detail/<int:pk>/', generic_employee.EmployeeDetail.as_view()),
 ]
