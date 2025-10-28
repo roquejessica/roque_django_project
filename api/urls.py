@@ -2,15 +2,17 @@ from rest_framework.routers import DefaultRouter
 
 from django.urls import path, include
 from api.views import student_function_base_view, employee_function_base_view, student_class_base_view, employee_class_base_view, mixins_employee, mixins_students, generic_employee
-from api.views import employee_viewset
+from api.views import employee_viewset, student_viewset
 
 router = DefaultRouter()
 router.register('viewsets-employees', employee_viewset.Employees, basename='viewsets-employees')
-# router.register('model-viewsets-employees', employee_viewset.EmployeeModelViewSet)
+router.register('model-viewsets-employees', employee_viewset.EmployeeModelViewSet)
+router.register('viewsets-students', student_viewset.Students, basename='viewsets-students')
+router.register('model-viewsets-students', student_viewset.StudentModelViewSet)
 
 urlpatterns = [
     path('fbv-students/', student_function_base_view.studentView),
-    # path('fbv-students/<int:pk>', function_base_view.student_detail),
+    # path(', student_viewsetfbv-students/<int:pk>', function_base_view.student_detail),
     path('fbv-student/<int:student_id>', student_function_base_view.student),
 
     path('fbv-employees/', employee_function_base_view.EmployeeView),
