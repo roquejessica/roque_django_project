@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from api.views import student_function_base_view, employee_function_base_view, student_class_base_view, employee_class_base_view, mixins_employee, mixins_students, generic_employee
 from api.views import employee_viewset, student_viewset
+from api.views import nested_serializer_view
 
 router = DefaultRouter()
 router.register('viewsets-employees', employee_viewset.Employees, basename='viewsets-employees')
@@ -33,5 +34,15 @@ urlpatterns = [
     path('generic-employees/', generic_employee.Employees.as_view()),
     path('generic-employee-detail/<int:pk>/', generic_employee.EmployeeDetail.as_view()),
 
-    path ('', include(router.urls))
+    path ('', include(router.urls)),
+
+    path('blogs/', nested_serializer_view
+    .BlogsView.as_view()),
+    path('comments/', nested_serializer_view
+    .CommentsView.as_view()),
+
+    path('blogs/<int:pk>', nested_serializer_view
+    .BlogDetailView.as_view()),
+    path('comments/<int:pk>', nested_serializer_view
+    .CommentDetailView.as_view()),
 ]
